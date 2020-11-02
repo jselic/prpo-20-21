@@ -1,6 +1,7 @@
 package si.fri.prpo.jdbc;
 
 import java.util.List;
+import java.sql.*;
 
 public interface BaseDao {
     Connection getConnection();

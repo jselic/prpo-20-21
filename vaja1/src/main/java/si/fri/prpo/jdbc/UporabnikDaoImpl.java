@@ -1,7 +1,6 @@
 package si.fri.prpo.jdbc;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.logging.*;
 
@@ -10,7 +9,7 @@ import javax.sql.DataSource;
 
 public class UporabnikDaoImpl implements BaseDao {
     private static UporabnikDaoImpl instance;
-    private static final Logger log = getLogger(UporabnikDaoImpl.class.getName());
+    private static final Logger log = new getLogger(UporabnikDaoImpl.class.getName());
 
     private Connection connection;
 
@@ -87,7 +86,7 @@ public class UporabnikDaoImpl implements BaseDao {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
-                return getUporabnikFromRS(rs);
+                getUporabnikFromRS(rs);
             }else{
                 log.info("Uporabnik ne obstaja");
             }
@@ -109,13 +108,13 @@ public class UporabnikDaoImpl implements BaseDao {
         PreparedStatement ps = null;
 
         try{
-            String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,'','');";
+            String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,'Debug','Debug');";
             ps = connection.prepareStatement(query);
-            ps.setInt(1,ent.getId());
+            ps.setInt(1,u.getId());
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
-                return getUporabnikFromRS(rs);
+                getUporabnikFromRS(rs);
             }else{
                 log.info("Uporabnik ne obstaja");
             }
@@ -144,7 +143,7 @@ public class UporabnikDaoImpl implements BaseDao {
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
-                return getUporabnikFromRS(rs);
+                getUporabnikFromRS(rs);
             }else{
                 log.info("Uporabnik ne obstaja");
             }
