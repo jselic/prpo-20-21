@@ -1,15 +1,15 @@
 package si.fri.prpo.jdbc;
 
 import java.sql.*;
-import java.util.List;
+import java.util.*;
 import java.util.logging.*;
 
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class UporabnikDaoImpl implements BaseDao {
-    private static UporabnikDaoImpl instance;
-    private static final Logger log = new getLogger(UporabnikDaoImpl.class.getName());
+    private static              UporabnikDaoImpl instance;
+    private static final        Logger           log = Logger.getLogger(UporabnikDaoImpl.class.getName());
 
     private Connection connection;
 
@@ -110,7 +110,7 @@ public class UporabnikDaoImpl implements BaseDao {
         try{
             String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,'Debug','Debug');";
             ps = connection.prepareStatement(query);
-            ps.setInt(1,u.getId());
+            ps.setInt(1,ent.getId());
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
@@ -167,7 +167,7 @@ public class UporabnikDaoImpl implements BaseDao {
         PreparedStatement ps = null;
         try{
             ps = connection.createStatement();
-            String query = "SELECT * FROM uporabnik";
+            String query = "SELECT * FROM uporabnik;";
             ResultSet rs = ps.executeQuery(query);
             
             while(rs.next()) {
