@@ -28,10 +28,10 @@ public class UporabnikDaoImpl implements BaseDao {
 
     private Uporabnik getUporabnikFromRS(ResultSet rs) throws SQLException {
 
+        int id = rs.getInt("id");
         String ime = rs.getString("ime");
         String priimek = rs.getString("priimek");
-        String uporabniskoIme = rs.getString("uporabniskoime");
-        return new Uporabnik(ime, priimek, uporabniskoIme);
+        return new Uporabnik(id ,ime, priimek);
     
     }
 
@@ -73,6 +73,7 @@ public class UporabnikDaoImpl implements BaseDao {
                 }
             }   
         }
+        return null;
     }
 
     @Override
@@ -80,7 +81,7 @@ public class UporabnikDaoImpl implements BaseDao {
         PreparedStatement ps = null;
 
         try{
-            String query = "DELETE * FROM uporabnik WHERE id = ?;";
+            String query = "DELETE FROM uporabnik WHERE id = ?;";
             ps = connection.prepareStatement(query);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
@@ -108,7 +109,7 @@ public class UporabnikDaoImpl implements BaseDao {
         PreparedStatement ps = null;
 
         try{
-            String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,'Debug','Debug');";
+            String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,'Helo','Debug');";
             ps = connection.prepareStatement(query);
             ps.setInt(1,ent.getId());
             ResultSet rs = ps.executeQuery();
@@ -164,7 +165,7 @@ public class UporabnikDaoImpl implements BaseDao {
     public List<Entiteta> vrniVse(){
 
         List<Entiteta> list = new ArrayList();
-        PreparedStatement ps = null;
+        Statement ps = null;
         try{
             ps = connection.createStatement();
             String query = "SELECT * FROM uporabnik;";

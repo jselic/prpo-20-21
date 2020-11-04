@@ -16,4 +16,18 @@ public class Uporabnik extends Entiteta{
     public String getPriimek(){ return priimek;}
     public void setIme(String ime){ this.ime = ime;}
     public void setPriimek(String priimek){ this.priimek = priimek;}
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("ID: ");
+        sb.append(Integer.toString(super.getId()));
+        sb.append("Ime: ");
+        sb.append(this.ime);
+        sb.append("Priimek: ");
+        sb.append(this.priimek);
+
+        return sb.toString();
+    }
 }
