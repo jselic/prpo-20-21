@@ -18,10 +18,13 @@ public class Vaja1Servlet extends HttpServlet {
         Optional<String> microserviceName = ConfigurationUtil.getInstance().get("kumulizee.name");
 
         BaseDao uporabnikDao = UporabnikDaoImpl.getInstance();
-        Uporabnik uporabnik = new Uporabnik((int)Math.round(Math.random()*1000),"Blake","Blakerson");
+        Uporabnik uporabnik = new Uporabnik((int)Math.round(Math.random()*5000),"Blake","Blakerson");
 
         in.append("Nov uporabnik...");
         uporabnikDao.vstavi(uporabnik);
+        uporabnik.setIme("Gazda");
+        uporabnikDao.posodobi(uporabnik);
+        uporabnikDao.odstrani(uporabnik.getId());
         in.append("\n\n");
 
         in.append("Seznam\n");

@@ -109,9 +109,11 @@ public class UporabnikDaoImpl implements BaseDao {
         PreparedStatement ps = null;
 
         try{
-            String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,'Helo','Debug');";
+            String query = "INSERT INTO uporabnik(id,ime,priimek) VALUES(?,?,?);";
             ps = connection.prepareStatement(query);
             ps.setInt(1,ent.getId());
+            ps.setString(2, ((Uporabnik)ent).getIme());
+            ps.setString(3, ((Uporabnik)ent).getPriimek());
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
@@ -138,9 +140,11 @@ public class UporabnikDaoImpl implements BaseDao {
         PreparedStatement ps = null;
 
         try{
-            String query = "UPDATE uporabnik SET name = 'Debug', priimek = 'Debug', WHERE id = ?;";
+            String query = "UPDATE uporabnik SET ime = ?, priimek = ? WHERE id = ?;";
             ps = connection.prepareStatement(query);
-            ps.setInt(1, ent.getId());
+            ps.setString(1, ((Uporabnik)ent).getIme());
+            ps.setString(2, ((Uporabnik)ent).getPriimek());
+            ps.setInt(3, ent.getId());
             ResultSet rs = ps.executeQuery();
 
             if(rs.next()){
